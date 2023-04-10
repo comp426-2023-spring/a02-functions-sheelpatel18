@@ -3,6 +3,8 @@ import minimist from 'minimist';
 import fetch from 'node-fetch';
 import moment from 'moment-timezone';
 
+// rhythm is a widdle jewybean
+
 const args = minimist(process.argv.slice(2));
 
 function printHelp() {
@@ -41,11 +43,12 @@ function printHelp() {
   }
 
   async function main() {
+    console.log(args)
     // Process command line arguments and set defaults
     const latitude = args.n || args.s;
     const longitude = args.e || args.w;
     const timezone = args.z || moment.tz.guess();
-    const day = args.d || 1;
+    const day = args.d !== undefined ? args.d : 1;
   
     // Validate input
     if (!latitude || !longitude) {
