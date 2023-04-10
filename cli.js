@@ -29,10 +29,20 @@ function printHelp() {
     // const apiUrl = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&hourly=precipitation_hours&timezone=${timezone}`;
     const apiUrl = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&daily=weathercode,temperature_2m_max,temperature_2m_min,sunrise,sunset,precipitation_sum,precipitation_hours,windspeed_10m_max,windgusts_10m_max,winddirection_10m_dominant&current_weather=true&temperature_unit=fahrenheit&windspeed_unit=mph&precipitation_unit=inch&timezone=${timezone}`
   
+    // Validate input
+    if ((!latitude || !longitude) && !args.j) {
+        console.error('Error: Latitude and longitude must be provided.');
+        printHelp();
+      }
+
     try {
       // Fetch data from the API
       const response = await fetch(apiUrl);
       const data = await response.json();
+      if (args.j) {
+        console.log(JSON.stringify(data, null, 2));
+        process.exit(0);
+      }
   
       // Return the weather data for the specified day
       return data.daily.precipitation_hours[day];
@@ -43,18 +53,12 @@ function printHelp() {
   }
 
   async function main() {
-    console.log(args)
     // Process command line arguments and set defaults
     const latitude = args.n || args.s;
     const longitude = args.e || args.w;
     const timezone = args.z || moment.tz.guess();
     const day = args.d !== undefined ? args.d : 1;
-  
-    // Validate input
-    if (!latitude || !longitude) {
-      console.error('Error: Latitude and longitude must be provided.');
-      printHelp();
-    }
+
   
     // Fetch weather data and print the result
     const precipitationHours = await getWeatherData(latitude, longitude, timezone, day);
