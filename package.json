@@ -1,0 +1,29 @@
+{
+  "name": "a02-functions-sheelpatel18",
+  "version": "1.0.0",
+  "description": "This assignment will help you learn to create an installable Node.js command line utility.",
+  "main": "galosh.js",
+  "type": "module",
+  "scripts": {
+    "test": "node cli.js -n 35.92 -w 79.05 -z America/New_York"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/comp426-2023-spring/a02-functions-sheelpatel18.git"
+  },
+  "keywords": [],
+  "author": "Sheel Patel",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/comp426-2023-spring/a02-functions-sheelpatel18/issues"
+  },
+  "bin": {
+    "galosh.js": "./cli.js"
+  },
+  "homepage": "https://github.com/comp426-2023-spring/a02-functions-sheelpatel18#readme",
+  "dependencies": {
+    "minimist": "^1.2.8",
+    "moment-timezone": "^0.5.43",
+    "node-fetch": "^3.3.1"
+  }
+}
