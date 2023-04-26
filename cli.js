@@ -25,6 +25,11 @@ function printHelp() {
   }
   
   async function getWeatherData(latitude, longitude, timezone, day) {
+
+    if (!latitude) {
+      console.log('Latitude must be in range')
+      return;
+    }
     // Construct the API URL using the provided parameters
     // const apiUrl = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&hourly=precipitation_hours&timezone=${timezone}`;
     const apiUrl = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&daily=weathercode,temperature_2m_max,temperature_2m_min,sunrise,sunset,precipitation_sum,precipitation_hours,windspeed_10m_max,windgusts_10m_max,winddirection_10m_dominant&current_weather=true&temperature_unit=fahrenheit&windspeed_unit=mph&precipitation_unit=inch&timezone=${timezone}`
